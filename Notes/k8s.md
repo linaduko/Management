@@ -14,6 +14,8 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 ![изображение](https://user-images.githubusercontent.com/101510056/211191928-e37ba159-b7c8-45f4-b302-9463d11ea0cf.png)
 
 
+https://www.digitalocean.com/community/tutorials/how-to-create-a-kubernetes-cluster-using-kubeadm-on-ubuntu-18-04-ru
+
 - [ ] SSH  \
 https://www.digitalocean.com/community/tutorials/ssh-essentials-working-with-ssh-servers-clients-and-keys#generating-and-working-with-ssh-keys
 
