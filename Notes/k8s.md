@@ -27,3 +27,5 @@ https://docs.docker.com/engine/install/ubuntu/
 
 sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
+
+![изображение](https://user-images.githubusercontent.com/101510056/211202126-94b28c5b-fc61-4911-9e13-1607809044ec.png)
