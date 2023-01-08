@@ -29,3 +29,6 @@ sudo rm /etc/containerd/config.toml
 sudo systemctl restart containerd
 
 ![изображение](https://user-images.githubusercontent.com/101510056/211202126-94b28c5b-fc61-4911-9e13-1607809044ec.png)
+
+![изображение](https://user-images.githubusercontent.com/101510056/211202963-a1299d41-8245-4a3c-b18c-d19fbe5e2619.png)
+
