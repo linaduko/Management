@@ -10,3 +10,5 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-ku
 ---
 create cluster \
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/ \
+
+https://stackoverflow.com/questions/72504257/i-encountered-when-executing-kubeadm-init-error-issue
