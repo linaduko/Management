@@ -24,3 +24,6 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an
 
 - [ ] Dockder  \
 https://docs.docker.com/engine/install/ubuntu/
+
+sudo rm /etc/containerd/config.toml
+sudo systemctl restart containerd
