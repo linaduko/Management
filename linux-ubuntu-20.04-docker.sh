@@ -16,9 +16,8 @@ dpkg -i ./containerd.io.deb \
 
 service docker start
 systemctl enable docker.service
-git systemctl enable containerd.service
+systemctl enable containerd.service
 
-groupadd docker
 usermod -aG docker $USER
 
 #LinOps
