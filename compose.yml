@@ -1,0 +1,35 @@
+version: '3.5'
+
+networks:
+  frontend:
+    driver: ${NETWORKS_DRIVER}
+  backend:
+    driver: ${NETWORKS_DRIVER}
+
+volumes:
+  redis:
+    driver: ${VOLUMES_DRIVER}
+
+services:
+
+  php-fpm:
+    build:
+      context: ./php-workspace 
+    volumes:
+    - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+    - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}   
+    ports:
+    - "9000"
+    networks:
+    - backend
+
+  redis:
+    build: 
+      context: ./redis
+    volumes:
+    - ${DATA_PATH_HOST}/redis:/data
+    command: --requirepass ${REDIS_PASSWORD}
+    ports:
+    - "6379:6379"
+    networks:
+    - backend
