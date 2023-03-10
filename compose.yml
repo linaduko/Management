@@ -7,14 +7,16 @@ networks:
     driver: ${NETWORKS_DRIVER}
 
 volumes:
+  mysql:
+    driver: ${VOLUMES_DRIVER}
   redis:
     driver: ${VOLUMES_DRIVER}
-
+  
 services:
 
   php-fpm:
     build:
-      context: ./php-workspace 
+      context: ./php-fpm
     volumes:
     - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
     - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}   
@@ -22,6 +24,18 @@ services:
     - "9000"
     networks:
     - backend
+
+  mysql:
+    image: mysql:8.0
+    environment:
+     - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
 
   redis:
     build: 
