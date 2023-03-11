@@ -1,5 +1,4 @@
-ARG PHP_VERSION
-FROM php:${PHP_VERSION}
+FROM php:8.0
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -43,3 +42,36 @@ RUN pecl install redis-5.3.7 \
     docker-php-ext-enable redis
 
 
+COPY ./php.ini /usr/local/etc/php/conf.d
+
+USER root
+
+# Clean up
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    rm /var/log/lastlog /var/log/faillog
+
+# Configure non-root user.
+ARG PUID=1000
+ENV PUID ${PUID}
+ARG PGID=1000
+ENV PGID ${PGID}
+
+RUN groupmod -o -g ${PGID} www-data && \
+    usermod -o -u ${PUID} -g www-data www-data
+
+# Adding the faketime library to the preload file needs to be done last
+# otherwise it will preload it for all commands that follow in this file
+RUN if [ ${INSTALL_FAKETIME} = true ]; then \
+    echo "/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1" > /etc/ld.so.preload \
+;fi
+
+# Configure locale.
+ARG LOCALE=POSIX
+ENV LC_ALL ${LOCALE}
+
+WORKDIR /var/www
+
+CMD ["php-fpm"]
+
+EXPOSE 9000
