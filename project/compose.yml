@@ -24,7 +24,10 @@ services:
       - "9000"
     networks:
       - backend
-
+  
+  nginx:
+    build:
+      context: ./nginx
   mysql:
     build:
       context: ./mysql
@@ -42,6 +45,7 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     networks:
+      - frontend
       - backend
 
   redis:
