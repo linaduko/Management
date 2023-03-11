@@ -2,7 +2,6 @@ FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/
 
-
 RUN apk update \
     && apk upgrade \
     && apk --update add logrotate \
@@ -22,14 +21,14 @@ ARG PHP_UPSTREAM_PORT=9000
 RUN touch /var/log/messages
 
 # Copy 'logrotate' config file
-#COPY logrotate/nginx /etc/logrotate.d/
+COPY logrotate/nginx /etc/logrotate.d/
 
 # Set upstream conf and remove the default conf
 RUN echo "upstream php-upstream { server ${PHP_UPSTREAM_CONTAINER}:${PHP_UPSTREAM_PORT}; }" > /etc/nginx/conf.d/upstream.conf \
     && rm /etc/nginx/conf.d/default.conf
 
-ADD ./setup.sh /opt/setup.sh
-RUN sed -i 's/\r//g' /opt/setup.sh
-CMD ["/bin/bash", "/opt/setup.sh"]
+#ADD ./setup.sh /opt/setup.sh
+#RUN sed -i 's/\r//g' /opt/setup.sh
+#CMD ["/bin/bash", "/opt/setup.sh"]
 
 EXPOSE 80 81 443
