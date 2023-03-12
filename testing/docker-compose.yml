@@ -19,7 +19,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+#      - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+      - ./data/:/var/www/html/
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ${NGINX_SSL_PATH}:/etc/nginx/ssl
@@ -27,10 +28,11 @@ services:
       - php-fpm
     networks:
       - backend
-      
+
   php-fpm:
     image: php:8.0-fpm
     volumes:
+      - ./data/:/var/www/html
       - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}   
     ports:
