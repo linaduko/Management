@@ -4,8 +4,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN set -eux; \
     apt-get update; \
-    pecl channel-update pecl.php.net \
-    apt-get upgrade -y; \
+    pecl channel-update pecl.php.net && \
+    apt-get upgrade -yqq && \
     apt-get install -y --no-install-recommends \
             apt-utils \
             gnupg2 \
